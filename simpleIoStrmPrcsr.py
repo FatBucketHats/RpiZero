@@ -1,7 +1,7 @@
 import serial
 import struct
-
-ser = serial.Serial('/dev/ttyAMA0',230400, timeout =1) #Open port with baud rate, 9600
+import time
+ser = serial.Serial('/dev/ttyAMA0',1000000, timeout =1) #Open port with baud rate, 9600
 tryAgain = True
 while tryAgain:
 	try:
@@ -9,7 +9,6 @@ while tryAgain:
 			while True:
 				if ser.in_waiting == 0:
 					break
-
 				data = ser.read(24) #Read up to 24 bytes, only have a 16 byte buffer
 				xyz = struct.unpack('ddd', data) #Unpack data
 				#print(xyz) #print tuple
